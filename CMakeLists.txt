@@ -4,41 +4,25 @@ project(SPIRAL LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Geant4 REQUIRED ui_all vis_all)
-include(${Geant4_USE_FILE})
+find_package(Geant4 REQUIRED)
 
-# ======== System-installed gdstk ========
-# find_library(GDSTK_LIBRARY NAMES gdstk REQUIRED)
-# find_path(GDSTK_INCLUDE_DIR gdstk.h)
-
-# ======== Local gdstk sources ========
 add_subdirectory(external/gdstk)
 
 file(GLOB_RECURSE SPIRAL_SOURCES
-    src/*.cc
-    src/*.cpp
-)
-
-include_directories(
-    ${Geant4_INCLUDE_DIRS}
-    ${PROJECT_SOURCE_DIR}/include
-    ${PROJECT_SOURCE_DIR}/external/gdstk/include
+    ${PROJECT_SOURCE_DIR}/src/*.cc
 )
 
 add_executable(spiral ${SPIRAL_SOURCES})
 
-# -----------------------
-# Link libraries
-# -----------------------
-target_link_libraries(spiral
-    ${Geant4_LIBRARIES}
-    gdstk
+target_include_directories(spiral PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/external/gdstk/include
+    ${Geant4_INCLUDE_DIRS}
 )
 
-# -----------------------
-# Optional: install and post-build data setup
-# -----------------------
-install(TARGETS spiral DESTINATION bin)
+target_link_libraries(spiral PRIVATE
+    gdstk
+    ${Geant4_LIBRARIES}
+)
 
-# Optionally copy Geant4 datasets or GDML files post-build
-# (add_custom_command/post_build logic if needed)
+geant4_use_standard_modules(spiral)
