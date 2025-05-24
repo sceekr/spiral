@@ -5,6 +5,7 @@ cmake-build-*/
 
 CMakeFiles/
 CMakeCache.txt
+CMakePresets.json
 cmake_install.cmake
 Makefile
 
@@ -19,3 +20,6 @@ Makefile
 *.log
 *.tmp
 *.swp
+
+*.gds
+*.oas

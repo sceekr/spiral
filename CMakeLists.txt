@@ -9,10 +9,10 @@ find_package(Geant4 REQUIRED)
 add_subdirectory(external/gdstk)
 
 file(GLOB_RECURSE SPIRAL_SOURCES
-    ${PROJECT_SOURCE_DIR}/src/*.cc
+    ${PROJECT_SOURCE_DIR}/src/*.cpp
 )
 
-add_executable(spiral ${SPIRAL_SOURCES})
+add_executable(spiral main.cpp ${SPIRAL_SOURCES})
 
 target_include_directories(spiral PRIVATE
     ${PROJECT_SOURCE_DIR}/include
@@ -24,5 +24,3 @@ target_link_libraries(spiral PRIVATE
     gdstk
     ${Geant4_LIBRARIES}
 )
-
-geant4_use_standard_modules(spiral)
