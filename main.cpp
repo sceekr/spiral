@@ -1,20 +1,27 @@
 #include <iostream>
+#include <CLI/CLI.hpp>
 
 #include "utils/layout/parse.hpp"
 
+using namespace std;
+
 int main(int argc, char** argv) {
-    std::cout << "SPIRAL: SPICE-based IRradiation Analysis for Layouts" << std::endl;
+    string layout_path;
+    gdstk::Library lib;
 
-    if (argc == 2) {
-        gdstk::Library lib;
-        if (! open_lib(lib, argv[1])) return 1;
+    CLI::App app{"SPIRAL"};
 
-        lib.print(true);
+    app.add_option("-l,--layout", layout_path, "Path to GDS/OASIS file")->required();
 
-        lib.free_all();
-    } else {
-        std::cout << "Expected one argument, the GDS/OAS path." << std::endl;
-    }
+    cout << "SPIRAL: SPICE-based IRradiation Analysis for Layouts" << endl;
+
+    CLI11_PARSE(app, argc, argv);
+    
+    if (! open_lib(lib, layout_path.c_str())) return 1;
+
+    lib.print(true);
+
+    lib.free_all();
 
     return 0;
 }
