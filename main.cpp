@@ -1,13 +1,13 @@
 #include <iostream>
 #include <CLI/CLI.hpp>
 
-#include "utils/layout/parse.hpp"
+#include "utils/layout/Layout.hpp"
 
 using namespace std;
 
 int main(int argc, char** argv) {
     string layout_path;
-    gdstk::Library lib;
+    Layout layout;
 
     CLI::App app{"SPIRAL"};
 
@@ -17,11 +17,7 @@ int main(int argc, char** argv) {
 
     CLI11_PARSE(app, argc, argv);
     
-    if (! open_lib(lib, layout_path.c_str())) return 1;
-
-    lib.print(true);
-
-    lib.free_all();
+    if (! layout.open_layout(layout_path.c_str())) return 1;
 
     return 0;
 }
