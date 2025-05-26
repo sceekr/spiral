@@ -20,26 +20,23 @@ bool Layout::open_layout(const char* path) {
 }
 
 vector<Rectangle> Layout::rectangle_decomp() {
-    gdstk::Array<gdstk::Polygon*> polys;
+    gdstk::Array<gdstk::Cell*> tops = {};
+    gdstk::Array<gdstk::RawCell*> raw = {};
+    gdstk::Array<gdstk::Polygon*> polys = {};
     vector<Rectangle> rects;
 
-    for (uint64_t i = 0; i < lib_.cell_array.count; i++) {
-        gdstk::Cell* cell = lib_.cell_array[i];
+    lib_.top_level(tops, raw);
+    raw.clear();
 
-        for (uint64_t j = 0; j < cell->flexpath_array.count; j++) {
-            gdstk::FlexPath* fpath = cell->flexpath_array[j];
-            fpath->to_polygons(false, NULL, polys);
-        }
+    for (uint64_t i = 0; i < tops.count; i++) {
+        gdstk::Cell* cell = tops[i];
 
-        for (uint64_t j = 0; j < cell->robustpath_array.count; j++) {
-            gdstk::RobustPath* fpath = cell->robustpath_array[j];
-            fpath->to_polygons(false, NULL, polys);
-        }
-
-        polys.copy_from(cell->polygon_array);
+        cell->get_polygons(false, true, -1, false, 0, polys);
     }
 
     for (uint64_t i = 0; i < polys.count; i++) poly_to_rects(polys[i], rects);
+
+    polys.clear();
 
     return rects;
 }

@@ -33,8 +33,19 @@ struct Rectangle {
     bool valid() const {
         return xmax >= xmin && ymax >= ymin;
     }
+
+    void offset(double dx, double dy) {
+        xmin += dx;
+        xmax += dx;
+        ymin += dy;
+        ymax += dy;
+    }
 };
 
 vector<double> get_scanline_intersections(gdstk::Polygon* poly, double y);
+
+gdstk::Array<gdstk::Vec2> single_bounding_box(gdstk::Polygon* poly);
+
+void poly_to_rects_single(gdstk::Polygon* poly, vector<Rectangle>& out);
 
 void poly_to_rects(gdstk::Polygon* poly, vector<Rectangle>& out);

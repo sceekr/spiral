@@ -1,4 +1,4 @@
-#include "utils/netlist/parse.hpp"
+#include "utils/netlist/Netlist.hpp"
 
 void loadNetlist() {
     // ceci est un proute
