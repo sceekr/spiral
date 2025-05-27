@@ -31,7 +31,7 @@
 
 ### Prerequisites
 
-- blahblah
+- Geant4
 - bleh
 
 ### Building

@@ -1,5 +1,7 @@
 .vscode/
 
+pdk/
+
 build/
 cmake-build-*/
 

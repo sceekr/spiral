@@ -5,6 +5,8 @@
 #include <map>
 
 #include "gdstk/gdstk.hpp"
+#include "G4Element.hh"
+#include "G4Material.hh"
 
 using namespace std;
 
@@ -40,6 +42,16 @@ struct Rectangle {
         ymin += dy;
         ymax += dy;
     }
+};
+
+struct Box {
+    Rectangle base;
+    double thickness;
+    G4Element* element;
+    G4Material* material;
+
+    Box(G4Element* element = nullptr, G4Material* material = nullptr)
+        : base(), thickness(0), element(element), material(material) {}
 };
 
 vector<double> get_scanline_intersections(gdstk::Polygon* poly, double y);

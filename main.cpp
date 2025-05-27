@@ -21,10 +21,11 @@ int main(int argc, char** argv) {
     if (! layout.open_layout(layout_path.c_str())) return 1;
 
     rects = layout.rectangle_decomp();
-
     for (const Rectangle& rect : rects) {
         cout << "(" << rect.xmin << ", " << rect.ymin << ") (" << rect.xmax << ", " << rect.ymax << ")" <<  endl;
     }
+
+    layout.export_used_layers("layers.json");
 
     return 0;
 }

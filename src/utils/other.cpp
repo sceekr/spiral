@@ -16,3 +16,16 @@ bool ends_with(const char* str, const char* search) {
     }
     return true;
 }
+
+bool save_json(const nlohmann::json& j, const char* path) {
+    if (! path[0]) return false;
+
+    FILE* file = std::fopen(path, "w");
+    if (! file) return false;
+
+    bool saved = (fputs(j.dump(4).c_str(), file) != EOF);
+
+    fclose(file);
+
+    return saved;
+}
