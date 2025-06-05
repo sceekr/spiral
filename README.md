@@ -31,8 +31,18 @@
 
 ### Prerequisites
 
-- Geant4
-- bleh
+- [Geant4](https://gitlab.cern.ch/geant4/geant4)
+
+Some repositories already contain Geant4 and you may simply install it from there.
+For instance, you may find it on the [Arch AUR](https://aur.archlinux.org/packages/geant4).
+
+### Dependencies
+
+They will be automatically cloned in `external/` when cloning with submodules.
+
+- [CLI11](https://github.com/CLIUtils/CLI11.git)
+- [gdstk](https://github.com/heitzmann/gdstk)
+- [nlohmann's JSON](https://github.com/nlohmann/json.git)
 
 ### Building
 
@@ -54,6 +64,12 @@ make -j$(nproc)
 ```bash
 ./spiral --gds path/to/layout.gds --netlist path/to/circuit.sp --chier-dans-le-cul
 ```
+
+### Technology files
+
+To correctly process layouts using the appropriate fabrication stack, the program requires a technology file.
+Such files follow a custom, JSON-based structure that is not standardized. Since the information they contain is typically foundry-confidential, no technology files are shared here.
+To create one for your own process technology, please refer to **WIP: TO-DO WIKI**.
 
 ## License
 

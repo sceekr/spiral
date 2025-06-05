@@ -44,16 +44,6 @@ struct Rectangle {
     }
 };
 
-struct Box {
-    Rectangle base;
-    double thickness;
-    G4Element* element;
-    G4Material* material;
-
-    Box(G4Element* element = nullptr, G4Material* material = nullptr)
-        : base(), thickness(0), element(element), material(material) {}
-};
-
 vector<double> get_scanline_intersections(gdstk::Polygon* poly, double y);
 
 gdstk::Array<gdstk::Vec2> single_bounding_box(gdstk::Polygon* poly);

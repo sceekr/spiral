@@ -1,4 +1,4 @@
-#include "utils/layout/geometry.hpp"
+#include "layout/utils/geometry.hpp"
 
 vector<double> get_scanline_intersections(gdstk::Polygon* poly, double y) {
     vector<double> inters;
@@ -79,7 +79,7 @@ void poly_to_rects_single(gdstk::Polygon* poly, vector<Rectangle>& out) {
             }
         }
 
-        vector<std::pair<double, double>> rem;
+        vector<pair<double, double>> rem;
         for (const auto& [key, rect] : active_rects) {
             if (find(x_inters.begin(), x_inters.end(), key.first) == x_inters.end()) {
                 out.push_back(rect);

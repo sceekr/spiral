@@ -1,7 +1,7 @@
 #include <iostream>
 #include <CLI/CLI.hpp>
 
-#include "utils/layout/Layout.hpp"
+#include "spiral.hpp"
 
 using namespace std;
 
@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
         cout << "(" << rect.xmin << ", " << rect.ymin << ") (" << rect.xmax << ", " << rect.ymax << ")" <<  endl;
     }
 
-    layout.export_used_layers("layers.json");
+    layout.init_techfile("layers.json");
 
     return 0;
 }
